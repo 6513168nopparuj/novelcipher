@@ -1,69 +1,125 @@
-# Welcome to your Lovable project
 
-## Project info
+# NovelCipher - Secure Novel Reading Application
 
-**URL**: https://lovable.dev/projects/cae12dac-c3e8-46d2-b625-30575afc526d
+A secure web application for reading novels with encryption and copy protection features.
 
-## How can I edit this code?
+## Project Overview
 
-There are several ways of editing your application.
+NovelCipher provides a secure reading experience with:
+- End-to-end encryption of novel content
+- Copy protection to prevent unauthorized content extraction
+- Clean, responsive reading interface
+- Chapter navigation and font size adjustment
 
-**Use Lovable**
+## Setup Instructions
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/cae12dac-c3e8-46d2-b625-30575afc526d) and start prompting.
+### Prerequisites
 
-Changes made via Lovable will be committed automatically to this repo.
+- Node.js (v16 or later)
+- MongoDB (v4.4 or later)
+- npm or yarn
 
-**Use your preferred IDE**
+### Environment Variables
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Create a `.env` file in the root directory with the following variables:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```
+# Server Configuration
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/novels
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Encryption Settings
+ENCRYPTION_KEY=0123456789abcdef0123456789abcdef
+ENCRYPTION_IV=abcdef9876543210
 ```
 
-**Edit a file directly in GitHub**
+### Backend Setup
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. Install backend dependencies:
+   ```sh
+   cd server
+   npm install
+   ```
 
-**Use GitHub Codespaces**
+2. Make sure MongoDB is running on your system:
+   ```sh
+   # Start MongoDB (command may vary depending on your OS and installation method)
+   mongod --dbpath /path/to/data/db
+   ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+3. Start the server:
+   ```sh
+   npm run dev
+   ```
 
-## What technologies are used for this project?
+4. The API server will be available at `http://localhost:3000`
 
-This project is built with .
+### Frontend Setup
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Install frontend dependencies:
+   ```sh
+   # From the project root
+   npm install
+   ```
 
-## How can I deploy this project?
+2. Start the development server:
+   ```sh
+   npm run dev
+   ```
 
-Simply open [Lovable](https://lovable.dev/projects/cae12dac-c3e8-46d2-b625-30575afc526d) and click on Share -> Publish.
+3. The application will be available at `http://localhost:8080`
 
-## I want to use a custom domain - is that possible?
+## Database Structure
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+NovelCipher uses MongoDB with the following structure:
+- Database: `novels`
+- Collection: `chapters`
+- Document format: `{ "chapter": number, "content": "encrypted-content" }`
+
+## API Endpoints
+
+- GET `/api/chapters` - Returns a list of all available chapters
+- GET `/api/chapters/:id` - Returns the decrypted content of a specific chapter
+
+## Client Features
+
+- **Home Page**: Browse and select available chapters
+- **Reader Page**: Read chapter content with navigation controls
+- **Security Features**: Copy protection, encrypted content transmission
+- **Customization**: Adjustable font size, settings persistence
+
+## Deployment
+
+For production deployment:
+
+```sh
+# Build frontend
+npm run build
+
+# Start production server
+cd server
+npm start
+```
+
+## Custom Domain Setup
+
+We don't support custom domains yet. If you want to deploy your project under your own domain, we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+
+## Development
+
+This project was created with [Lovable](https://lovable.dev/projects/cae12dac-c3e8-46d2-b625-30575afc526d).
+
+### Technologies Used
+
+- **Frontend**: React, TypeScript, Tailwind CSS, shadcn/ui
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Security**: AES-256-CBC encryption, copy protection measures
+
+## Contributing
+
+1. Clone the repository
+2. Create a new branch (`git checkout -b feature/awesome-feature`)
+3. Commit your changes (`git commit -m 'Add some awesome feature'`)
+4. Push to the branch (`git push origin feature/awesome-feature`)
+5. Open a Pull Request
